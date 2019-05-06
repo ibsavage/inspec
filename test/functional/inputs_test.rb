@@ -98,7 +98,7 @@ describe 'inputs' do
       cmd += File.join(inputs_profiles_path, 'metadata-empty')
       result = run_inspec_process(cmd, json: true)
       result.stderr.must_include 'WARN: Inputs must be defined as an Array. Skipping current definition.'
-      assert_exit_code 0, result
+      result.exit_status.must_equal 0
     end
 
     it "errors with invalid input types" do
