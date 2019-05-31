@@ -68,7 +68,7 @@ require "inspec/log"
 require "inspec/backend"
 require "helpers/mock_loader"
 
-TMP_CACHE = {}.freeze
+TMP_CACHE = {}
 
 Inspec::Log.logger = Logger.new(nil)
 
