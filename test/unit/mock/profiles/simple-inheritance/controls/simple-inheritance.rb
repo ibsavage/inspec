@@ -1,5 +1,5 @@
-include_controls 'failures'
+include_controls "failures"
 
-describe file('/tmp') do
+describe file("/tmp") do
   it { should be_directory }
 end

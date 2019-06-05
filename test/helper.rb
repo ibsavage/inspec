@@ -5,8 +5,8 @@
 # Do not add any other code to this code block. Simplecov and
 # coveralls only until the next code block:
 
-require 'simplecov'
-require 'coveralls'
+require "simplecov"
+require "coveralls"
 
 SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new([
   SimpleCov::Formatter::HTMLFormatter,
@@ -14,10 +14,10 @@ SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new([
 ])
 
 SimpleCov.start do
-  add_filter '/test/'
-  add_group 'Resources', 'lib/resources'
-  add_group 'Matchers', 'lib/matchers'
-  add_group 'Backends', 'lib/inspec/backend'
+  add_filter "/test/"
+  add_group "Resources", "lib/resources"
+  add_group "Matchers", "lib/matchers"
+  add_group "Backends", "lib/inspec/backend"
 end
 
 ##
@@ -62,13 +62,13 @@ require "rspec"
 # End of rspec vs minitest fight
 ########################################################################
 
-require 'webmock/minitest'
-require 'mocha/setup'
-require 'inspec/log'
-require 'inspec/backend'
+require "webmock/minitest"
+require "mocha/setup"
+require "inspec/log"
+require "inspec/backend"
 require "helpers/mock_loader"
 
-TMP_CACHE = {}
+TMP_CACHE = {}.freeze
 
 Inspec::Log.logger = Logger.new(nil)
 
@@ -148,7 +148,7 @@ end
 class Minitest::Test
   raise "You must remove skip_now" if Time.now > Time.local(2019, 6, 14)
 
-  def skip_until y,m,d,msg
+  def skip_until(y, m, d, msg)
     raise msg if Time.now > Time.local(y, m, d)
     skip msg
   end
