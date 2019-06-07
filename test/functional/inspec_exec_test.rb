@@ -8,6 +8,31 @@ describe 'inspec exec' do
     skip_windows!
   }
 
+#   it 'runs_directly' do
+#     require "inspec/cli"
+#     require "misc/exit_wtf"
+#     cli = Inspec::InspecCLI.new
+#     cli.exec("examples/profile")
+#   end
+#
+#   it 'profiler_run' do
+#     require "stackprof"
+#     output = File.join Dir.pwd, 'stackprof-exec-test.dump'
+#     StackProf.run(mode: :cpu, out: output) do
+#       out = inspec('exec ' + example_profile  + ' --no-create-lockfile')
+#       out.stderr.must_equal ''
+#       out.exit_status.must_equal 101
+#       stdout = out.stdout.force_encoding(Encoding::UTF_8)
+#       stdout.must_include "\e[38;5;41m  ✔  ssh-1: Allow only SSH Protocol 2\e[0m\n"
+#       stdout.must_include "
+# \e[38;5;247m  ↺  gordon-1.0: Verify the version number of Gordon (1 skipped)\e[0m
+# \e[38;5;247m     ↺  Can't find file `/tmp/gordon/config.yaml`\e[0m
+# "
+#       stdout.must_include "\nProfile Summary: \e[38;5;41m2 successful controls\e[0m, 0 control failures, \e[38;5;247m1 control skipped\e[0m\n"
+#       stdout.must_include "\nTest Summary: \e[38;5;41m4 successful\e[0m, 0 failures, \e[38;5;247m1 skipped\e[0m\n"
+#     end
+#   end
+
   it 'can execute the profile' do
     out = inspec('exec ' + example_profile  + ' --no-create-lockfile')
     out.stderr.must_equal ''
@@ -218,6 +243,7 @@ Test Summary: 0 successful, 0 failures, 0 skipped
     let(:out) { inspec('exec ' + File.join(profile_path, 'aws-profile')) }
     let(:stdout) { out.stdout.force_encoding(Encoding::UTF_8) }
     it 'exits with an error' do
+      skip if ENV["NO_AWS"]
       stdout.must_include 'Resource `aws_iam_users` is not supported on platform'
       stdout.must_include 'Resource `aws_iam_access_keys` is not supported on platform'
       stdout.must_include 'Resource `aws_s3_bucket` is not supported on platform'

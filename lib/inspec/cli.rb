@@ -1,6 +1,9 @@
 # Copyright 2015 Dominik Richter
 
 require 'inspec/utils/deprecation/deprecator'
+require 'inspec/dist'
+require 'inspec/backend'
+require 'inspec/dependencies/cache'
 
 module Inspec # TODO: move this somewhere "better"?
   autoload :BaseCLI,       'inspec/base_cli'
@@ -452,6 +455,8 @@ end
 #---------------------------------------------------------------------#
 # Plugin Loading
 #---------------------------------------------------------------------#
+require 'inspec/plugin/v2'
+
 begin
   # Load v2 plugins.  Manually check for plugin disablement.
   omit_core = ARGV.delete('--disable-core-plugins')
